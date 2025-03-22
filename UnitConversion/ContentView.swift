@@ -53,44 +53,44 @@ struct ContentView: View {
     }
   }
   
-    var body: some View {
-      NavigationStack {
-        Form {
-          Section("Enter Input") {
-            TextField("Ex. 4", value: $inputNumber, format: .number)
-              .keyboardType(.decimalPad)
-              .focused($isFocused)
-            Picker("Unit", selection: $inputUnit) {
-              ForEach(Unit.allCases) { unit in
-                Text(unit.rawValue)
-              }
+  var body: some View {
+    NavigationStack {
+      Form {
+        Section("Enter Input") {
+          TextField("Ex. 4", value: $inputNumber, format: .number)
+            .keyboardType(.decimalPad)
+            .focused($isFocused)
+          Picker("Unit", selection: $inputUnit) {
+            ForEach(Unit.allCases) { unit in
+              Text(unit.rawValue)
             }
-            .pickerStyle(.segmented)
           }
-          Section("Select Output Unit") {
-            Picker("Unit", selection: $outputUnit) {
-              ForEach(Unit.allCases) { unit in
-                Text(unit.rawValue)
-              }
-            }
-            .pickerStyle(.segmented)
-          }
-          Section("Result") {
-            Text(outputNumber.formatted())
-          }
+          .pickerStyle(.segmented)
         }
-        .navigationTitle(Text("Unit Conversion"))
-        .toolbar {
-          if isFocused {
-            Button("Done") {
-              isFocused = false
+        Section("Select Output Unit") {
+          Picker("Unit", selection: $outputUnit) {
+            ForEach(Unit.allCases) { unit in
+              Text(unit.rawValue)
             }
+          }
+          .pickerStyle(.segmented)
+        }
+        Section("Result") {
+          Text(outputNumber.formatted())
+        }
+      }
+      .navigationTitle(Text("Unit Conversion"))
+      .toolbar {
+        if isFocused {
+          Button("Done") {
+            isFocused = false
           }
         }
       }
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }
